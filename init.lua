@@ -21,23 +21,23 @@ end
 
 function Wrapper.setup()
 	vim.keymap.set("n", "<leader>w'", function()
-		require("wrapper").wrap_word("'")
+		require("nvim_wrapper").wrap_word("'")
 	end, { noremap = true, silent = true, desc = "[W]rap word with single quotes" })
 
 	vim.keymap.set("n", '<leader>w"', function()
-		require("wrapper").wrap_word("\"")
+		require("nvim_wrapper").wrap_word("\"")
 	end, { noremap = true, silent = true, desc = "[W]rap word with double quotes" })
 
 	vim.keymap.set("n", "<leader>w(", function()
-		require("wrapper").wrap_word("(")
+		require("nvim_wrapper").wrap_word("(")
 	end, { noremap = true, silent = true, desc = "[W]rap word with parenthesis" })
 
 	vim.keymap.set("n", "<leader>w[", function()
-		require("wrapper").wrap_word("[")
+		require("nvim_wrapper").wrap_word("[")
 	end, { noremap = true, silent = true, desc = "[W]rap word with square brackets" })
 
 	vim.keymap.set("n", "<leader>w{", function()
-		require("wrapper").wrap_word("{")
+		require("nvim_wrapper").wrap_word("{")
 	end, { noremap = true, silent = true, desc = "[W]rap word with curly brackets" })
 end
 
