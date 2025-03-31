@@ -27,25 +27,25 @@ function Wrapper.wrap_word(char)
 end
 
 function Wrapper.setup()
-	vim.keymap.set("n", "s'", function()
+	vim.keymap.set("n", "<leader>s'", function()
 		require("wrapper").wrap_word("'")
-	end, { noremap = true, silent = true, desc = "[S]urround word with single quotes" })
+	end, { noremap = true, silent = true, desc = "[W]rap word with single quotes" })
 
-	vim.keymap.set("n", "s\"", function()
+	vim.keymap.set("n", "<leader>s\"", function()
 		require("wrapper").wrap_word("'")
-	end, { noremap = true, silent = true, desc = "[S]urround word with single quotes" })
+	end, { noremap = true, silent = true, desc = "[W]rap word with single quotes" })
 
-	vim.keymap.set("n", "s(", function()
+	vim.keymap.set("n", "<leader>s(", function()
 		require("wrapper").wrap_word("'")
-	end, { noremap = true, silent = true, desc = "[S]urround word with parenthesis" })
+	end, { noremap = true, silent = true, desc = "[W]rap word with parenthesis" })
 
-    vim.keymap.set("n", "s[", function()
+    vim.keymap.set("n", "<leader>s[", function()
         require("wrapper").wrap_word("'")
-    end, { noremap = true, silent = true, desc = "[S]urround word with square brackets" })
+    end, { noremap = true, silent = true, desc = "[W]rap word with square brackets" })
 
-    vim.keymap.set("n", "s{", function()
+    vim.keymap.set("n", "<leader>s{", function()
         require("wrapper").wrap_word("'")
-    end, { noremap = true, silent = true, desc = "[S]urround word with curly brackets" })
+    end, { noremap = true, silent = true, desc = "[W]rap word with curly brackets" })
 end
 
 return Wrapper
