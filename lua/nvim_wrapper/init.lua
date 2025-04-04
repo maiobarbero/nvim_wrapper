@@ -1,22 +1,24 @@
 local Wrapper = {}
 
 function Wrapper.wrap_word(char)
-	local word = vim.fn.expand("<cword>")
-
-	local row = vim.fn.line(".") - 1 -- 0-indexed
-	local cursor_col = vim.fn.col(".") - 1 -- 0-indexed
-
 	local line = vim.api.nvim_get_current_line()
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    local row = cursor_pos[1] - 1
+    local col = cursor_pos[2]
+    local start_idx = col
 
-	local word_start = line:sub(1, cursor_col + 1):match(".*()%w+$")
-	if not word_start then
-		word_start = cursor_col
-	end
-	word_start = word_start - 1 -- Convert to 0-indexed
+    while start_idx > 0 and line:sub(start_idx, start_idx):match("[%w_]") do
+        start_idx = start_idx - 1
+    end
 
-	local word_end = word_start + #word
+    local end_idx = col
+    while end_idx <= #line and line:sub(end_idx + 1, end_idx + 1):match("[%w_]") do
+        end_idx = end_idx + 1
+    end
 
-	local wrapped = char .. word .. char
+    local word = line:sub(start_idx + 1, end_idx)
+
+	local wrapped
 
 	if char == "(" then
 		wrapped = "(" .. word .. ")"
@@ -24,9 +26,11 @@ function Wrapper.wrap_word(char)
 		wrapped = "[" .. word .. "]"
 	elseif char == "{" then
 		wrapped = "{" .. word .. "}"
+    else
+        wrapped = char .. word .. char
 	end
 
-	vim.api.nvim_buf_set_text(0, row, word_start, row, word_end, { wrapped })
+	vim.api.nvim_buf_set_text(0, row, start_idx, row, end_idx, { wrapped })
 end
 
 function Wrapper.setup()
